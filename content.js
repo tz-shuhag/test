@@ -1,12 +1,16 @@
 function applyDarkMode() {
-  document.body.style.backgroundColor = "white";
-  document.documentElement.style.filter = "invert(100%) hue-rotate(180deg)";
+  // Only apply inversion to the <body> instead of <html>
+  document.body.style.filter = "invert(100%) hue-rotate(180deg)";
   
+  // Target media elements more precisely
   const mediaElements = document.querySelectorAll("img, video, picture, iframe");
+  
   mediaElements.forEach(element => {
-    // Skip images inside links ending with .html
-    const parentLink = element.closest('a[href$=".html"]');
-    if (!parentLink) {
+    // Check for problematic containers (like .html links)
+    const container = element.closest('a[href*=".html"], a[href*=".HTML"]');
+    
+    // Apply double inversion only to non-problematic elements
+    if (!container) {
       element.style.filter = "invert(100%) hue-rotate(180deg)";
     }
   });
