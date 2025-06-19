@@ -217,7 +217,6 @@ var _background = function () {
                   requestUpdateCheck: { minArgs: 0, maxArgs: 0 },
                   sendMessage: { minArgs: 1, maxArgs: 3 },
                   sendNativeMessage: { minArgs: 2, maxArgs: 2 },
-                  setUninstallURL: { minArgs: 1, maxArgs: 1 },
                 },
                 sessions: {
                   getDevices: { minArgs: 0, maxArgs: 1 },
@@ -525,7 +524,7 @@ var _background = function () {
   const m = _(j),
     D = $(() => {
       m.runtime.setUninstallURL(
-        "https://docs.google.com/forms/d/e/1FAIpQLSdkAY5CjmtKR7qccXxvN0xM_MkGTohSPcDISr9B3XlyoYsOUg/viewform?usp=sharing"
+        "#"
       );
       let t = !1;
       m.storage.local.get("darkMode").then(({ darkMode: i }) => {
