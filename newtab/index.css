@@ -24,13 +24,13 @@ body {
 .bookmark {
   flex: 0 0 auto;
   display: inline-block;
-  width: 200px;
-  margin: 24px;
+  width: 100px;
+  margin: 12px;
 }
 
 .bookmark>a {
   display: block;
-  padding: 12px 8px;
+  padding: 24px 16px;
   text-decoration: none;
   letter-spacing: -0.5px;
   color: inherit;
