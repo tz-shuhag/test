@@ -1,36 +1,3 @@
-/*
- * Goo.js v0.1.1
- *
- * Inefficient, minimalist, JS renderer for lightweight components.
- * Try to imitate a React-inspired component structure without any extra lib.
- * Use only for local, controlled, small projects.
- * All the components are automatically wrapped in a div.
- *
- * USAGE:
- *    import {goo} from './goo.js';
- *    import {Component} from './goo.component.js'; // any goo-compatible component (has toString with return value)
- *    goo.root(Component, '#id'); // CSS selector, best use an id
- *
- * From inside a component:
- *    goo.render(Component, data); // to render another component, data can be anything
- *    goo.refresh(this); // to refresh the entire sub-tree from the current component down
- *    goo.onClick(function); // attach an event listener in a rendered string (remember to .bind(this))
- *
- * EXAMPLE:
- *    class MyRootClass {
- *      render() {
- *        return `
- *          <div ${goo.onClick(this.myClick.bind(this))}>
- *            ${goo.render(MyComponentClass, this.data)}
- *          </div>
- *        `;
- *      }
- *      myClick() {
- *        goo.refresh(this);
- *      }
- *    }
- */
-
 class Goo {
   constructor() {
     this.currentId = 0;
