@@ -51,7 +51,7 @@ body {
 
 .bookmark__img>img {
   filter: grayscale();
-  width: 64px;
+  width: 32px;
   height: auto;
 }
 
