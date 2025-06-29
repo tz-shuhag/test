@@ -1,9 +1,3 @@
-/*
- * Bliphome
- *
- */
-
-
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 81.25%; /* should match system size */
@@ -70,27 +64,6 @@ body {
   text-overflow: ellipsis;
 }
 
-.motivational {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 8px;
-  color: rgba(0, 0, 0, 0.5);
-
-  opacity: 0.0;
-  animation-duration: 10s;
-  animation-name: motivational-fadein;
-}
-
-@keyframes motivational-fadein {
-  0% { opacity: 0.0; }
-  10% { opacity: 0.0; }
-  40% { opacity: 1.0; }
-  80% { opacity: 1.0; }
-  100% { opacity: 0.0; }
-}
-
 .root__error {
   font-size: 1.1em;
 }
@@ -128,10 +101,6 @@ body {
 
   .bookmark__label {
     color: rgb(241, 243, 244);
-  }
-
-  .motivational {
-    color: rgba(176, 202, 212, 0.5);
   }
 
   .root__error>p {
