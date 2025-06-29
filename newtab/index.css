@@ -24,8 +24,8 @@ body {
 .bookmark {
   flex: 0 0 auto;
   display: inline-block;
-  width: 100px;
-  margin: 12px;
+  width: 200px;
+  margin: 24px;
 }
 
 .bookmark>a {
