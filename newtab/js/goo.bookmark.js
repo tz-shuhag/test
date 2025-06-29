@@ -24,8 +24,6 @@ export class Bookmark {
   onClickChromeURL(event) {
     let self = this;
 
-    // Necessary workaround due to Chrome security locks on `chrome:` urls
-    // See: https://github.com/folletto/Bliphome/issues/2
     chrome.tabs.getCurrent(function(tab) {
       chrome.tabs.update(tab.id, {url: self.bookmark.url});
     });
