@@ -1,0 +1,207 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+.no-select {
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+body,
+html {
+    height: 100%;
+    width: 100%;
+    line-height: 1.3;
+}
+
+html {
+    --serif: 'PT Serif', 'Times New Roman', serif;
+    --mono: 'Cascadia Code', monospace;
+    --font-scale: 80;
+    font-family: var(--serif);
+    font-size: 12px;
+    @media only screen {
+        font-size: calc((var(--vH) + var(--vW)) / 2 / var(--font-scale));
+    }
+}
+
+body {
+    color: #000000;
+    fill: #000000;
+    background: #191919;
+    padding: 0;
+    margin: 0;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+content {
+    height: 100%;
+    width: 100%;
+    background: #ffffff;
+    @media only screen {
+        max-height: calc(100svw * 1.41428571428571);
+        max-width: calc(100svh * 0.707070707070707);
+    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1.6rem;
+    div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    div.outline {
+        border: 1px solid #cccccc;//rgba(0,0,0,.2);
+        border-radius: 6px;
+        height: 1px;
+        min-height: 5rem;
+        padding: 2.5rem 2.5rem;
+        text-align: center;
+        width: 70%;
+        max-width: 70%;
+        &:has(.none) {
+            display: none;
+        }
+    }
+    span {
+        text-align: center;
+        &[name="cc"], &[name="cn"], &[name="ah"] {
+            font-weight: 700;
+            font-size: 2.4rem;
+        }
+        &[name="cc"]::after {
+            content: ':';
+            padding-right: .8rem;
+        }
+        &[name="tn"], &[name="tc"], &[name="td"], &[name="at"],
+        &[name="sn"], &[name="sc"], &[name="si"], &[name="sr"],
+        &[name="sb"], &[name="in"], &[name="ss"], &[name="sd"],
+        &[name="dn"], &[name="un"] {
+            font-size: 1.5rem;
+        }
+        &[name="tc"] {
+            &::before {
+                content: '(';
+                padding-left: .5rem;
+            }
+            &::after {
+                content: ')';
+            }
+        }
+        &[name="sn"] {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        &[name="sc"]::before {
+            content: 'Code:';
+            padding-right: .5rem;
+        }
+        &[name="si"]::before {
+            content: 'ID No.:';
+            padding-right: .5rem;
+        }
+        &[name="sr"]::before {
+            content: 'Roll No.:';
+            padding-right: .5rem;
+        }
+        &[name="sb"] {
+            &::before {
+                content: 'Batch:';
+                padding-right: .5rem;
+            }
+        }
+        &[name="in"] {
+            &::before {
+                content: 'Intake:';
+                padding-right: .5rem;
+            }
+        }
+        &[name="sb"] {
+            &:has(+ span + span[name="ss"]:not(.none))::after {
+                content: ',';
+                padding-right: .5rem;
+            }
+        }
+        &[name="in"] {
+            &:has(+ span[name="ss"]:not(.none))::after {
+                content: ',';
+                padding-right: .5rem;
+            }
+        }
+        &[name="ss"]::before {
+            content: 'Section:';
+            padding-right: .5rem;
+        }
+        &[name="sd"]::before {
+            content: 'Date of Submission:';
+            padding-right: .5rem;
+        }
+        /* Margins */
+        &[name="ah"], &[name="sn"] {
+            margin-top: 8rem;
+        }
+        &[name="sd"] {
+            margin: 5rem 0;
+        }
+        /* Display */
+        &.none {
+            display: none;
+        }
+    }
+    /* When Assignment Topic is Null */
+    &:has(> .outline > .none) span {
+        &[name="ah"], &[name="sn"] {
+            margin-top: 11.4rem;
+        }
+    }
+}
+
+#print, #download {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    right: calc(2 * 12px);//2rem;
+    color: #f8fafc;
+    font-family: 'Cascadia Code', monospace;
+    font-size: calc(1.2 * 12px);//1.2rem;
+    height: calc(4.8 * 12px);//4.8rem;
+    padding: 0 calc(1.6 * 12px);//1.6rem;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: inset 0 1px 0 0 #ffffff0d, 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    &:active {
+        transform: translateY(3px);
+    }
+    @media print {
+        display: none;
+    }
+}
+
+#print {
+    bottom: calc(8.25 * 12px);//9rem;
+    background: #0ea5e9;
+    &:hover, &:focus {
+        background: #38bdf8;
+    }
+}
+
+#download {
+    bottom: calc(2 * 12px);//2rem;
+    background: #eb550f;
+    &:hover, &:focus {
+        background: #ff6c10;
+    }
+}
+
+.none {
+    display: none;
+}

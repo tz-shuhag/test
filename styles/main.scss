@@ -1,0 +1,343 @@
+@mixin sameSize($size) {
+    height: $size;
+    width: $size;
+}
+
+@mixin resize($width, $size) {
+    @media only screen and (max-width: #{$width}) {
+        font-size: #{$size};
+    }
+}
+
+* {
+    scrollbar-width: thin !important;
+    scrollbar-color: var(--accent-1) #00000000 !important;
+    &, &::before, &::after {
+        box-sizing: inherit;
+        outline: none;
+        transition-duration: .1s;
+        -webkit-tap-highlight-color: transparent;
+    }
+}
+
+*::-webkit-scrollbar {
+    width: 7px !important;
+    height: 7px !important;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: var(--accent-1) !important;
+}
+
+*::-webkit-scrollbar-track {
+    background: #00000000 !important;
+}
+
+// ::selection {
+//     color: var(--accent-1);
+//     background: var(--accent-2);
+// }
+
+body,
+html {
+    height: 100%;
+    width: 100%;
+    line-height: 1.3;
+}
+
+html {
+    --serif: 'PT Serif', 'Times New Roman', serif;
+    --mono: 'Cascadia Code', monospace;
+    font-family: var(--serif);
+    font-size: 10px;
+    @include resize(1280px, 9.5px);
+    @include resize(1024px, 9px);
+    @include resize(768px, 8.5px);
+    @include resize(640px, 8px);
+    // @include resize(580px, 7.5px);
+    // @include resize(480px, 7px);
+    box-sizing: border-box;
+    &, &.darkmode {
+        --background-1: #0b1023;
+        --background-2: #1e293b;
+        --background-2h: #334155;
+        --main-text: #f8fafc;
+        --accent: #0ea5e9;
+        --accent-h: #38bdf8;
+        --accent-alt: #6467f2;
+        --accent-alt-h: #8284f7;
+        --success: #339933;
+        --failure: #bb3333;
+    }
+}
+
+body {
+    color: var(--main-text);
+    fill: var(--main-text);
+    background: var(--background-1);
+    padding: 0;
+    margin: 0;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+input {
+    font-family: var(--mono);
+}
+
+label {
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 2.5rem;
+    height: 100%;
+    width: 100%;
+    input[type='submit'] {
+        display: none;
+    }
+    form {
+        padding: 2.5rem 2.5rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 4.25rem;
+        @media only screen and (max-width: 480px) {
+            gap: 3.75rem;
+            height: calc(100svh - 8.5rem - 12.5rem - 5rem);
+            justify-content: flex-start;
+            overflow: auto;
+        }
+        div {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 2.75rem;
+            @media only screen and (max-width: 480px) {
+                width: 100%;
+                flex-direction: column;
+                > i:has(> input[type='text']) {
+                    min-width: 100%;
+                }
+            }
+            &:not(.swapper) {
+                width: 100%;
+            }
+            &.swapper {
+                flex: 1 0 auto;
+                min-width: 18rem;
+                max-width: 36rem;
+                gap: 0;
+                flex-wrap: nowrap;
+                flex-direction: row-reverse;
+                @media only screen and (max-width: 480px) {
+                    > i:has(> input[type='text']) {
+                        min-width: unset;
+                        flex: 1 0 auto;
+                    }
+                }
+                @media only screen and (max-width: 480px) {
+                    max-width: unset;
+                }
+            }
+        }
+        i:has(> input[type='text']) {
+            font-style: normal;
+            position: relative;
+            input[type='text'] {
+                position: relative;
+                height: 100%;
+                width: 100%;
+                border: 0;
+                color: inherit;
+                background: transparent;
+                z-index: 1;
+            }
+            label {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                left: 0;
+                top: 0;
+                padding: 0 1.5rem;
+                opacity: .5;
+                z-index: 0;
+                cursor: text;
+            }
+            &:focus-within, &.keepabove {
+                label {
+                    height: unset;
+                    top: -2rem;
+                    font-size: 1.2rem;
+                    cursor: default;
+                }
+            }
+            font-family: var(--mono);
+            font-size: 1.6rem;
+            background: transparent;
+            border: 0;
+            color: var(--main-text);
+            background: var(--background-2);
+            height: 4rem;
+            padding: 0 1.5rem;
+            box-shadow: inset 0 1px 0 0 #ffffff0d;
+            border-radius: 6px;
+            width: 1px;
+            flex: 1 0 auto;
+            min-width: 18rem;
+            max-width: 36rem;
+            &:has(input[type="text"]:hover), &:has(input[type="text"]:focus) {
+                background: var(--background-2h);
+            }
+            @media only screen and (max-width: 480px) {
+                max-width: unset;
+            }
+            border-left: 3px solid transparent;
+            &:has(input[required]) {
+                border-color: var(--accent);
+            }
+        }
+        .swapper {
+            .swap {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0 1.5rem;
+                height: 4rem;
+                background: var(--accent);
+                box-shadow: inset 0 1px 0 0 #ffffff0d;
+                border-radius: 0 6px 6px 0;
+                font-family: var(--mono);
+                > i {
+                    line-height: 1;
+                }
+                &:hover, &:focus {
+                    cursor: pointer;
+                    background: var(--accent-h);
+                }
+                &:active > i {
+                    transform: scale(.65) !important;
+                }
+            }
+            i:has(> .swaptarget) {
+                border-radius: 6px 0 0 6px;
+            }
+        }
+    }
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 8.5rem;
+    padding: 2.5rem 2.5rem 0 2.5rem;
+    width: 100%;
+    #logo {
+        display: flex;
+        font-family: var(--serif);
+        font-size: 6rem;
+        font-weight: 700;
+        cursor: pointer;
+        &:hover, &:focus {
+            fill: var(--accent-h);
+        }
+        &:active {
+            transform: scale(.9);
+        }
+        fill: var(--accent);
+        svg {
+            height: 1em;
+            width: auto;
+        }
+    }
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: 8rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2.5rem 2.5rem 2.5rem;
+    gap: 1.5rem;
+    @media only screen and (max-width: 480px) {
+        height: 15rem;
+    }
+    #generate, #share {
+        width: 1px;
+        max-width: 36rem;
+        flex: 1 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 0;
+        height: 5.5rem;
+        padding: 0 2rem;
+        border-radius: 6px;
+        box-shadow: inset 0 1px 0 0 #ffffff0d;
+        cursor: pointer;
+        color: var(--main-text);
+        font-size: 1.6rem;
+        font-family: var(--mono);
+        font-weight: 700;
+        &:active {
+            transform: translateY(3px);
+        }
+        @media only screen and (max-width: 480px) {
+            max-width: unset;
+            width: 100%;
+        }
+    }
+    #generate {
+        background: var(--accent);
+        &:hover, &:focus {
+            background: var(--accent-h);
+        }
+    }
+    #share {
+        &:not(.success):not(.failure) {
+            > .pass, > .fail {
+                display: none;
+            }
+            background: var(--accent-alt);
+            &:hover, &:focus {
+                background: var(--accent-alt-h);
+            }
+        }
+        &.success {
+            background: var(--success);
+            > .general, > .fail {
+                display: none;
+            }
+        }
+        &.failure {
+            background: var(--failure);
+            > .pass, > .general {
+                display: none;
+            }
+        }
+    }
+}
