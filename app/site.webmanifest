@@ -1,6 +1,6 @@
 {
-    "name": "ACover",
-    "short_name": "ACover",
+    "name": "Assignment Cover",
+    "short_name": "AC",
     "icons": [
         {
             "src": "192.png",
@@ -13,7 +13,7 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#38bdf8",
-    "background_color": "#070b0c",
+    "theme_color": "#114f24",
+    "background_color": "#120d17",
     "display": "standalone"
 }
