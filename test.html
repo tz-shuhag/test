@@ -91,24 +91,17 @@
     function generateQR() {
       const text = document.getElementById('string').value;
       let ecc = parseInt(document.getElementById('eccval').value, 10);
-      if (isNaN(ecc) || ecc < 1 || ecc > 4) ecc = 1; // default ECC=1 if invalid
+      if (isNaN(ecc) || ecc < 1 || ecc > 4) ecc = 1;
 
       const imgContainer = document.getElementById('img-container');
-
-      // Clear previous QR code
-      imgContainer.innerHTML = '';
+      imgContainer.innerHTML = ''; // Clear previous QR code
       document.getElementById('download-btn').style.display = 'none';
 
       // Generate QR code
       doqr(text, ecc, '#eee', '#000', imgContainer);
 
-      // Show download button if canvas exists
-      setTimeout(() => {
-        const canvas = imgContainer.querySelector('canvas');
-        if (canvas) {
-          document.getElementById('download-btn').style.display = 'inline-block';
-        }
-      }, 100);
+      // Show download button
+      document.getElementById('download-btn').style.display = 'inline-block';
     }
 
     function downloadQR() {
