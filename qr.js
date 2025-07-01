@@ -761,12 +761,10 @@ function doqr(string, eccval, bg, fg, container) {
         }
     }
 
-    let img = document.createElement('img');
-        newCanvas = trimCanvas(document.getElementById('qrcanv'));
-    img.src = newCanvas.toDataURL("image/png");
-    container.textContent = '';
-    container.appendChild(img);
-    container.appendChild(newCanvas);
+    let newCanvas = trimCanvas(document.getElementById('qrcanv'));
+container.textContent = '';
+container.appendChild(newCanvas);
+
 }
 
 /* The Trim Canvas function is MIT.
