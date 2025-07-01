@@ -72,13 +72,8 @@
 
     <form name="qrinp" onsubmit="return false;">
       <label>
-        ECC Level (L, M, Q, H):
-        <select id="eccval" name="ECC">
-          <option value="L">L (Low)</option>
-          <option value="M" selected>M (Medium)</option>
-          <option value="Q">Q (Quartile)</option>
-          <option value="H">H (High)</option>
-        </select>
+        ECC Level (1–4):
+        <input type="number" id="eccval" name="ECC" value="1" min="1" max="4" size="1" />
       </label>
       <label>
         Text:
@@ -95,7 +90,9 @@
   <script>
     function generateQR() {
       const text = document.getElementById('string').value;
-      const ecc = document.getElementById('eccval').value;
+      let ecc = parseInt(document.getElementById('eccval').value, 10);
+      if (isNaN(ecc) || ecc < 1 || ecc > 4) ecc = 1; // default ECC=1 if invalid
+
       const imgContainer = document.getElementById('img-container');
 
       // Clear previous QR code
@@ -105,7 +102,7 @@
       // Generate QR code
       doqr(text, ecc, '#eee', '#000', imgContainer);
 
-      // Wait a tiny bit and show download button if canvas is added
+      // Show download button if canvas exists
       setTimeout(() => {
         const canvas = imgContainer.querySelector('canvas');
         if (canvas) {
