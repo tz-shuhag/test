@@ -1,50 +1,128 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-touch-fullscreen" content="yes" />
-<style type="text/css">
-  html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-touch-fullscreen" content="yes" />
+  <style type="text/css">
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
 
-  body {
-    display: flex;
-    align-items: center;     /* Center container vertically */
-    justify-content: center; /* Center container horizontally */
-  }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: lightgray;
+    }
 
-  div#qrdiv {
-    width: 200px;
-    height: 200px;
-    display: flex;
-    align-items: center;     /* Center content vertically */
-    justify-content: center; /* Center content horizontally */
-    text-align: center;      /* Center multi-line text */
-    border: 1px solid #ccc;  /* Optional: for visual debugging */
-  }
-</style>
+    #qrdiv {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      width: 100%;
+      max-width: 90vw;
+    }
 
-  
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
 
-</script>-->
+    textarea {
+      width: 90%;
+      max-width: 300px;
+      height: 80px;
+    }
+
+    #img-container {
+      width: 35vw;
+      max-width: 250px;
+      aspect-ratio: 1/1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      border: 1px solid #ccc;
+      position: relative;
+    }
+
+    #img-container canvas,
+    #img-container img {
+      width: 100%;
+      height: auto;
+    }
+
+    #download-btn {
+      display: none;
+      margin-top: 0.5rem;
+    }
+  </style>
 </head>
 <body>
-<div id="qrdiv" style="background:lightgray; position:absolute; width:100%; height:100%">
-    QR Code Generator
-    <form name="qrinp">
-        <input type="button" value="Go" onclick="doqr(document.querySelector('#string').value, document.querySelector('#eccval').value, '#eee', '#000', document.getElementById('img-container'))" />
-        ECC Level (1-4)
-        <input type="numeric" id="eccval" name="ECC" value="1" size="1"><br>
-        Text:<textarea id="string" name="qrinput" size=2953>Hello World!</textarea><br>
+  <div id="qrdiv">
+    <div><strong>QR Code Generator</strong></div>
+
+    <form name="qrinp" onsubmit="return false;">
+      <label>
+        ECC Level (L, M, Q, H):
+        <select id="eccval" name="ECC">
+          <option value="L">L (Low)</option>
+          <option value="M" selected>M (Medium)</option>
+          <option value="Q">Q (Quartile)</option>
+          <option value="H">H (High)</option>
+        </select>
+      </label>
+      <label>
+        Text:
+        <textarea id="string" name="qrinput">Hello World!</textarea>
+      </label>
+      <input type="button" value="Generate QR Code" onclick="generateQR()" />
     </form>
+
     <div id="img-container"></div>
-    <!-- <canvas id="qrcanv" width="812" height="812">No Canvas Support?</canvas> -->
-     <script type="text/javascript" src="qr.js"></script>
-</div>
+    <button id="download-btn" onclick="downloadQR()">Download QR Code</button>
+  </div>
+
+  <script type="text/javascript" src="qr.js"></script>
+  <script>
+    function generateQR() {
+      const text = document.getElementById('string').value;
+      const ecc = document.getElementById('eccval').value;
+      const imgContainer = document.getElementById('img-container');
+
+      // Clear previous QR code
+      imgContainer.innerHTML = '';
+      document.getElementById('download-btn').style.display = 'none';
+
+      // Generate QR code
+      doqr(text, ecc, '#eee', '#000', imgContainer);
+
+      // Wait a tiny bit and show download button if canvas is added
+      setTimeout(() => {
+        const canvas = imgContainer.querySelector('canvas');
+        if (canvas) {
+          document.getElementById('download-btn').style.display = 'inline-block';
+        }
+      }, 100);
+    }
+
+    function downloadQR() {
+      const canvas = document.querySelector('#img-container canvas');
+      if (!canvas) return;
+
+      const link = document.createElement('a');
+      link.download = 'qr-code.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+  </script>
 </body>
 </html>
