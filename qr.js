@@ -703,20 +703,13 @@ function genframe(instring)
 var wd, ht, qrc;
 function setupqr(container) {
    window.scrollTo(0,1)
-    // wd = window.innerWidth-10;
-    // ht = window.innerHeight-10;
     wd = 1000;
     ht = 1000;
-
-    // wd -= 4;
-    // ht -= 80;
 
     createCanvas(container);
 
     var elem = document.getElementById('qrcanv');
     qrc = elem.getContext('2d');
-    // qrc.canvas.width = wd;
-    // qrc.canvas.height = ht;
     qrc.fillStyle = '#eee';
     qrc.fillRect(0,0,wd,ht);
 }
@@ -734,7 +727,6 @@ function createCanvas(container) {
 }
 
 function doqr(string, eccval, bg, fg, container) {
-    // createCanvas();
     setupqr(container);
     d = document;
     ecclevel = eccval;
@@ -747,24 +739,19 @@ function doqr(string, eccval, bg, fg, container) {
     px=Math.round(px);
     qrc.clearRect(0,0,wd,ht);
     qrc.fillStyle = bg;
-    // qrc.fillRect(0,0,px*(width+8),px*(width+8));
     qrc.fillRect(0,0,px*width,px*width);
 
     qrc.fillStyle = fg;
     for (let i = 0; i < width; i++ ) {
         for (let j = 0; j < width; j++ ) {
             if (qf[j*width+i]) {
-                // qrc.fillRect(px*(4+i),px*(4+j),px,px);
                 qrc.fillRect(px*i,px*j,px,px);
             }
         }
     }
 
-    let img = document.createElement('img');
-        newCanvas = trimCanvas(document.getElementById('qrcanv'));
-    img.src = newCanvas.toDataURL("image/png");
     container.textContent = '';
-    container.appendChild(img);
+    newCanvas = trimCanvas(document.getElementById('qrcanv'));
     container.appendChild(newCanvas);
 }
 
