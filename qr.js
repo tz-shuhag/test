@@ -731,28 +731,29 @@ function doqr(string, eccval, bg, fg, container) {
     d = document;
     ecclevel = eccval;
     qf = genframe(string);
-    qrc.lineWidth=1;
+    qrc.lineWidth = 1;
 
     px = wd;
-    if (ht < wd) {px = ht;}
+    if (ht < wd) { px = ht; }
     px /= width;
-    px=Math.round(px);
-    qrc.clearRect(0,0,wd,ht);
+    px = Math.round(px);
+    qrc.clearRect(0, 0, wd, ht);
     qrc.fillStyle = bg;
-    qrc.fillRect(0,0,px*width,px*width);
+    qrc.fillRect(0, 0, px * width, px * width);
 
     qrc.fillStyle = fg;
-    for (let i = 0; i < width; i++ ) {
-        for (let j = 0; j < width; j++ ) {
-            if (qf[j*width+i]) {
-                qrc.fillRect(px*i,px*j,px,px);
+    for (let i = 0; i < width; i++) {
+        for (let j = 0; j < width; j++) {
+            if (qf[j * width + i]) {
+                qrc.fillRect(px * i, px * j, px, px);
             }
         }
     }
 
     container.textContent = '';
-    newCanvas = trimCanvas(document.getElementById('qrcanv'));
-    container.appendChild(newCanvas);
+    const canvas = document.getElementById('qrcanv');
+    canvas.style.position = 'static'; // Make it visible
+    container.appendChild(canvas);
 }
 
 function trimCanvas(c) {
