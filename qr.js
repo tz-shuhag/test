@@ -1,11 +1,3 @@
-/* QR Code Generator
- * https://github.com/NaeemBolchhi/qrcodegen
-
- * This project is licensed under GPL-3.0.
- * https://raw.githubusercontent.com/NaeemBolchhi/qrcodegen/refs/heads/main/LICENSE
- */
-
-// alignment pattern
 adelta = [
   0, 11, 15, 19, 23, 27, 31, // force 1 pat
   16, 18, 20, 22, 24, 26, 28, 20, 22, 24, 24, 26, 28, 28, 22, 24, 24,
@@ -776,12 +768,6 @@ function doqr(string, eccval, bg, fg, container) {
     container.appendChild(newCanvas);
 }
 
-/* The Trim Canvas function is MIT.
- * http://rem.mit-license.org
- 
- * Taken from Our Code World.
- * https://ourcodeworld.com/articles/read/683/how-to-remove-the-transparent-pixels-that-surrounds-a-canvas-in-javascript
- */
 function trimCanvas(c) {
     var ctx = c.getContext('2d'),
         copy = document.createElement('canvas').getContext('2d'),
