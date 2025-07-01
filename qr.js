@@ -1,10 +1,3 @@
-/* QR Code Generator
- * https://github.com/NaeemBolchhi/qrcodegen
-
- * This project is licensed under GPL-3.0.
- * https://raw.githubusercontent.com/NaeemBolchhi/qrcodegen/refs/heads/main/LICENSE
- */
-
 // alignment pattern
 adelta = [
   0, 11, 15, 19, 23, 27, 31, // force 1 pat
