@@ -45,6 +45,7 @@
 "resources":[
 "listener.js",
 "dark-mode.js",
+"dark-mode.helper.js"
 ],
 "matches":[
 "<all_urls>"
