@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cover Page</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="print.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+</head>
+<body>
+    <div class="cover-page">
+        <div class="logo-container">
+            <img src="university-logo.png" alt="University Logo">
+        </div>
+        
+        <div class="cover-content">
+            <div class="assignment-no" data-field="cn"></div>
+            <div class="teacher-info" data-field="tn"></div>
+            <div class="department" data-field="td"></div>
+            <div class="course-name" data-field="ah"></div>
+            <div class="assignment-topic" data-field="at"></div>
+            <div class="student-name" data-field="sn"></div>
+            <div class="student-id" data-field="si"></div>
+            <div class="batch" data-field="sb"></div>
+            <div class="submission-date" data-field="sd"></div>
+        </div>
+        
+        <div class="actions">
+            <button id="printBtn">Print</button>
+            <button id="downloadBtn">Download PDF</button>
+        </div>
+    </div>
+    
+    <script src="print.js"></script>
+</body>
+</html>
