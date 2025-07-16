@@ -1,3 +1,86 @@
 {
-"update_url": "https://clients2.google.com/service/update2/crx",
-"manifest_version":3,"name":"__MSG_extension_name__","short_name":"__MSG_extension_short_name__","description":"__MSG_extension_desc__","default_locale":"en","version":"1.0.8","version_name":"1.0.8.released","minimum_chrome_version":"88","icons":{"16":"media/img/icons/icon-16.png","48":"media/img/icons/icon-48.png","96":"media/img/icons/icon-96.png","128":"media/img/icons/icon-128.png","256":"media/img/icons/icon-256.png","512":"media/img/icons/icon-512.png"},"permissions":["storage","cookies","unlimitedStorage"],"content_security_policy":{"extension_pages":"script-src 'self'; object-src 'self'"},"host_permissions":["*://*/*"],"background":{"service_worker":"service_worker.js","type":"module"},"action":{"default_icon":{"16":"media/img/icons/icon-16.png","48":"media/img/icons/icon-48.png","96":"media/img/icons/icon-96.png","128":"media/img/icons/icon-128.png","256":"media/img/icons/icon-256.png","512":"media/img/icons/icon-512.png"}},"web_accessible_resources":[{"resources":["html/*","media/img/*","media/conf/*","media/css/*","*favicon/*"],"matches":["<all_urls>"]}],"content_scripts":[{"css":[],"js":["media/js/lib/jst.js","media/js/lib/jscs.js","media/js/opts.js","media/js/client.js"],"matches":["https://www.youtube.com/*"],"exclude_matches":["https://*.youtube.com/live_chat*","https://*/*.txt","https://*/*.png","https://*/*.jpg","https://*/*.jpeg","https://*/*.gif","https://*/*.xml","https://*/*.svg","https://*/*.manifest","https://*/*.log","https://*/*.ini"],"run_at":"document_start"}]}           
+  "manifest_version": 3,
+  "name": "YT Enhancer",
+  "short_name": "YT Enhancer",
+  "description": "Enhancement for Youtube",
+  "version": "1.0.",
+
+  "icons": {
+    "16": "media/img/icons/icon-16.png",
+    "48": "media/img/icons/icon-48.png",
+    "96": "media/img/icons/icon-96.png",
+    "128": "media/img/icons/icon-128.png",
+    "256": "media/img/icons/icon-256.png",
+    "512": "media/img/icons/icon-512.png"
+  },
+
+  "action": {
+    "default_icon": {
+      "16": "media/img/icons/icon-16.png",
+      "48": "media/img/icons/icon-48.png",
+      "96": "media/img/icons/icon-96.png",
+      "128": "media/img/icons/icon-128.png",
+      "256": "media/img/icons/icon-256.png",
+      "512": "media/img/icons/icon-512.png"
+    }
+  },
+
+  "permissions": [
+    "storage",
+    "cookies",
+    "unlimitedStorage"
+  ],
+
+  "host_permissions": ["*://www.youtube.com/*"],
+
+  "background": {
+    "service_worker": "service_worker.js",
+    "type": "module"
+  },
+
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "html/*",
+        "media/img/*",
+        "media/conf/*",
+        "media/css/*",
+        "*favicon/*"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "exclude_matches": [
+        "https://*.youtube.com/live_chat*",
+        "https://*/*.txt",
+        "https://*/*.png",
+        "https://*/*.jpg",
+        "https://*/*.jpeg",
+        "https://*/*.gif",
+        "https://*/*.xml",
+        "https://*/*.svg",
+        "https://*/*.manifest",
+        "https://*/*.log",
+        "https://*/*.ini"
+      ],
+      "js": [
+        "media/js/lib/jst.js",
+        "media/js/lib/jscs.js",
+        "media/js/opts.js",
+        "media/js/client.js"
+      ],
+      "css": [],
+      "run_at": "document_start"
+    }
+  ]
+}
