@@ -1,1 +1,45 @@
-.recommend-sc-dialog-x{width:260px;position:fixed;bottom:20px;right:15px;background-color:#fff;border-radius:10px;padding:10px;z-index:999999999999999;box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 3px 6px 0 rgba(0,0,0,.2)}.recommend-sc-dialog-x-message{white-space:normal;overflow-wrap:break-word;hyphens:auto;font-size:15px}.recommend-sc-dialog-x-message-item:first-child{font-size:19px;margin-bottom:10px;font-weight:700}.recommend-sc-dialog-x-btns{text-align:center;margin-top:15px;font-size:17px}.recommend-sc-dialog-x-btns .recommend-sc-dialog-x-btn{cursor:pointer;margin:0 10px}.recommend-sc-dialog-x-btns .recommend-sc-dialog-x-try-it-btn{display:inline-block;padding:4px 10px;text-align:center;background-color:rgba(0,0,0,.05);border-radius:5px;font-weight:700}
+.recommend-sc-dialog-x {
+  width: 260px;
+  position: fixed;
+  bottom: 20px;
+  right: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  z-index: 999999999999999;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16),
+              0 3px 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+.recommend-sc-dialog-x-message {
+  white-space: normal;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  font-size: 15px;
+}
+
+.recommend-sc-dialog-x-message-item:first-child {
+  font-size: 19px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.recommend-sc-dialog-x-btns {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 17px;
+}
+
+.recommend-sc-dialog-x-btns .recommend-sc-dialog-x-btn {
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.recommend-sc-dialog-x-btns .recommend-sc-dialog-x-try-it-btn {
+  display: inline-block;
+  padding: 4px 10px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  font-weight: 700;
+}
