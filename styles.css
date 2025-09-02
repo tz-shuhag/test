@@ -1,0 +1,48 @@
+:root{
+--bg:#0f0f10;
+--card:#151517;
+--text:#e9e9ee;
+--muted:#a0a0ad;
+--accent:#4f46e5;
+--accent-press:#4338ca;
+--ring: 0 0 0 8px rgba(79,70,229,.15);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+margin:0; font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+background: radial-gradient(1200px 800px at 50% -200px, #1c1c21 0, transparent 60%), var(--bg);
+color:var(--text);
+display:grid; place-items:center;
+}
+.wrap{ width:100%; max-width:720px; padding:24px; }
+.card{
+background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+border:1px solid rgba(255,255,255,.08);
+border-radius:28px; padding:32px; text-align:center;
+box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+.avatar{
+width:168px; height:168px; border-radius:24px; overflow:hidden; display:inline-grid; place-items:center; margin:-84px auto 16px; border:1px solid rgba(255,255,255,.10); background:#2a2a2f;
+}
+.avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
+h1{ font-size:clamp(28px, 4vw, 44px); line-height:1.1; margin:6px 0 2px; font-weight:800; letter-spacing:-.02em; }
+.sub{ color:var(--muted); font-weight:500; margin:0 0 18px; }
+.cta{
+display:inline-flex; align-items:center; gap:10px; padding:14px 18px; font-weight:700; text-decoration:none;
+background:var(--accent); color:white; border-radius:14px; border:0; cursor:pointer;
+transition: transform .08s ease, filter .2s ease, background .08s ease;
+box-shadow: 0 10px 24px rgba(79,70,229,.45);
+}
+.cta:focus{ outline:none; box-shadow: 0 10px 24px rgba(79,70,229,.55), var(--ring); }
+.cta:active{ transform: translateY(1px); background:var(--accent-press); }
+.cta svg{ width:20px; height:20px; }
+.links{ display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:16px; }
+.chip{ padding:8px 12px; border:1px dashed rgba(255,255,255,.18); color:var(--muted);
+border-radius:999px; font-size:13px; }
+footer{ text-align:center; color:var(--muted); font-size:12px; margin-top:22px; }
+@media (prefers-color-scheme: light){
+:root{ --bg:#fafafa; --card:#ffffff; --text:#0f1020; --muted:#5b5b6a; }
+body{ background: radial-gradient(1200px 800px at 50% -200px, #e7e7ff 0, transparent 55%), var(--bg); }
+.card{ background:#fff; }
+}
