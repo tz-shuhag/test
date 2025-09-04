@@ -3,10 +3,10 @@
 
   "manifest_version": 3,
 
-  "name": "MinimalTube - Productive Minimal YouTube",
+  "name": "Your Tube",
   "version": "1.0.0",
   "description": "Boost focus with a clean, distraction-free YouTube experience.",
-  "author": "Nazmul Hridoy",
+  "author": "TZ Shuhag",
 
   "icons": {
     "16": "assets/icon.png",
