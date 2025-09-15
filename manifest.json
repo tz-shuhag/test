@@ -4,10 +4,10 @@
   "version": "0.1.0",
   "description": "A customizable new tab extension.",
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "src/popup/popup.ts"
   },
   "chrome_url_overrides": {
-    "newtab": "index.html"
+    "newtab": "src/index.html"
   },
   "permissions": [],
   "icons": {
