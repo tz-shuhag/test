@@ -1,5 +1,8 @@
 name: Update Weather
 
+permissions:
+  contents: write  # <-- allows pushing changes
+  
 on:
   schedule:
     - cron: '0 */6 * * *'   # every 6 hours
@@ -25,10 +28,13 @@ jobs:
       - name: Run weather update script
         run: python update_weather.py
 
-      - name: Commit & push changes
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add README.md
-          git commit -m "Update weather data (BMD)" || echo "No changes to commit."
-          git push
+          - name: Commit & push changes
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add README.md
+        git commit -m "Update weather data (BMD)" || echo "No changes to commit"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
