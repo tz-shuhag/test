@@ -1,88 +1,71 @@
-#!/usr/bin/env python3
 import requests
 from bs4 import BeautifulSoup
 import re
-from datetime import datetime
-import time
-import sys
 
-# Station page (Sylhet)
 URL = "https://live6.bmd.gov.bd/bmd_web/weather-condition/web.php?view=web&stCode=41891&lang=EN"
 
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (compatible; GitHub Actions; +https://github.com)"
-}
+def get_weather():
+    r = requests.get(URL)
+    soup = BeautifulSoup(r.text, "html.parser")
 
-RETRY = 3
-TIMEOUT = 10
+    # Find the SVG where weather info lives
+    svg = soup.find("svg")
 
-def fetch_soup(url):
-    for attempt in range(1, RETRY+1):
-        try:
-            resp = requests.get(url, headers=HEADERS, timeout=TIMEOUT)
-            resp.raise_for_status()
-            return BeautifulSoup(resp.text, "html.parser")
-        except Exception as e:
-            if attempt == RETRY:
-                raise
-            time.sleep(2)
-    raise RuntimeError("Failed to fetch page")
+    if not svg:
+        return None
 
-def get_text_by_id(soup, id_):
-    tag = soup.find("text", {"id": id_})
-    return tag.get_text(strip=True) if tag else "N/A"
+    data = {}
 
-def build_md(soup):
-    now = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
-    temp_now = get_text_by_id(soup, "tempDrybulb")
-    temp_min = get_text_by_id(soup, "tempMin")
-    temp_max = get_text_by_id(soup, "tempMax")
-    humidity = get_text_by_id(soup, "Humidity")
-    rainfall = get_text_by_id(soup, "Rainfall")
-    wind = get_text_by_id(soup, "wind_speed")
-    condition = get_text_by_id(soup, "WeatherCondition")
+    # Extract values by their IDs
+    def get_text(id_):
+        tag = svg.find("text", {"id": id_})
+        return tag.text.strip() if tag else None
 
-    md = f"""### Sylhet Weather (Source: [BMD]({URL}))
+    data["temp"] = get_text("tempDrybulb")
+    data["min_temp"] = get_text("tempMin")
+    data["max_temp"] = get_text("tempMax")
+    data["humidity"] = None
 
-_Updated: {now}_
+    # Humidity text is next to <text id="labelRH">
+    label_rh = svg.find("text", {"id": "labelRH"})
+    if label_rh and label_rh.find_next("text"):
+        data["humidity"] = label_rh.find_next("text").text.strip()
 
-- 🌡️ **Current Temp:** {temp_now}
-- 🔻 **Min Temp:** {temp_min}
-- 🔺 **Max Temp:** {temp_max}
-- 💧 **Humidity:** {humidity}
-- 🌧️ **Rainfall:** {rainfall}
-- 💨 **Wind:** {wind}
-- 🌥️ **Condition:** {condition}
-"""
-    return md
+    # Rainfall is inside WeatherCondition text (sometimes included)
+    weather_condition = svg.find("text", {"id": "WeatherCondition"})
+    if weather_condition:
+        txt = weather_condition.text.strip()
+        if "Rain" in txt:
+            data["rainfall"] = txt
+        else:
+            data["rainfall"] = "No rainfall"
 
-def update_readme(md, path="README.md"):
-    try:
-        with open(path, "r", encoding="utf-8") as f:
-            content = f.read()
-    except FileNotFoundError:
-        content = ""
+    return data
 
-    pattern = re.compile(r'<!-- WEATHER-START -->(.*?)<!-- WEATHER-END -->', re.DOTALL)
+def update_readme(data):
+    with open("README.md", "r", encoding="utf-8") as f:
+        content = f.read()
 
-    block = f"<!-- WEATHER-START -->\n{md}\n<!-- WEATHER-END -->"
+    # Replace section between markers
+    new_section = (
+        "### 🌤 Sylhet Weather (BMD)\n"
+        f"- 🌡 Current: {data['temp']}\n"
+        f"- 🌡 Min: {data['min_temp']}\n"
+        f"- 🌡 Max: {data['max_temp']}\n"
+        f"- 💧 Humidity: {data['humidity']}\n"
+        f"- 🌧 Rainfall: {data.get('rainfall', 'N/A')}\n"
+    )
 
-    if pattern.search(content):
-        new_content = pattern.sub(block, content)
-    else:
-        # Append at the end if markers not present
-        if content and not content.endswith("\n"):
-            content += "\n"
-        new_content = content + "\n" + block + "\n"
+    content = re.sub(
+        r"### 🌤 Sylhet Weather \(BMD\)[\s\S]*?(?=<!-- weather-end -->)",
+        new_section + "\n",
+        content,
+    )
 
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(new_content)
-
-def main():
-    soup = fetch_soup(URL)
-    md = build_md(soup)
-    update_readme(md)
-    print("README updated with weather data.")
+    with open("README.md", "w", encoding="utf-8") as f:
+        f.write(content)
 
 if __name__ == "__main__":
-    main()
+    data = get_weather()
+    if data:
+        update_readme(data)
