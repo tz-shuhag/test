@@ -1,71 +1,26 @@
 import requests
 from bs4 import BeautifulSoup
-import re
 
-URL = "https://live6.bmd.gov.bd/bmd_web/weather-condition/web.php?view=web&stCode=41891&lang=EN"
+URL = "https://live6.bmd.gov.bd/map/7"
+response = requests.get(URL)
+soup = BeautifulSoup(response.text, "html.parser")
 
-def get_weather():
-    r = requests.get(URL)
-    soup = BeautifulSoup(r.text, "html.parser")
+# Example parsing (adjust selectors based on actual site)
+max_temp = "32"   # parse actual value
+min_temp = "24"
+humidity = "82"
+rainfall = "5"
 
-    # Find the SVG where weather info lives
-    svg = soup.find("svg")
+# Read README.md
+with open("README.md", "r", encoding="utf-8") as f:
+    readme = f.read()
 
-    if not svg:
-        return None
+# Replace placeholders
+readme = readme.replace("<!--MAX_TEMP-->", max_temp)
+readme = readme.replace("<!--MIN_TEMP-->", min_temp)
+readme = readme.replace("<!--HUMIDITY-->", humidity)
+readme = readme.replace("<!--RAINFALL-->", rainfall)
 
-    data = {}
-
-    # Extract values by their IDs
-    def get_text(id_):
-        tag = svg.find("text", {"id": id_})
-        return tag.text.strip() if tag else None
-
-    data["temp"] = get_text("tempDrybulb")
-    data["min_temp"] = get_text("tempMin")
-    data["max_temp"] = get_text("tempMax")
-    data["humidity"] = None
-
-    # Humidity text is next to <text id="labelRH">
-    label_rh = svg.find("text", {"id": "labelRH"})
-    if label_rh and label_rh.find_next("text"):
-        data["humidity"] = label_rh.find_next("text").text.strip()
-
-    # Rainfall is inside WeatherCondition text (sometimes included)
-    weather_condition = svg.find("text", {"id": "WeatherCondition"})
-    if weather_condition:
-        txt = weather_condition.text.strip()
-        if "Rain" in txt:
-            data["rainfall"] = txt
-        else:
-            data["rainfall"] = "No rainfall"
-
-    return data
-
-def update_readme(data):
-    with open("README.md", "r", encoding="utf-8") as f:
-        content = f.read()
-
-    # Replace section between markers
-    new_section = (
-        "### 🌤 Sylhet Weather (BMD)\n"
-        f"- 🌡 Current: {data['temp']}\n"
-        f"- 🌡 Min: {data['min_temp']}\n"
-        f"- 🌡 Max: {data['max_temp']}\n"
-        f"- 💧 Humidity: {data['humidity']}\n"
-        f"- 🌧 Rainfall: {data.get('rainfall', 'N/A')}\n"
-    )
-
-    content = re.sub(
-        r"### 🌤 Sylhet Weather \(BMD\)[\s\S]*?(?=<!-- weather-end -->)",
-        new_section + "\n",
-        content,
-    )
-
-    with open("README.md", "w", encoding="utf-8") as f:
-        f.write(content)
-
-if __name__ == "__main__":
-    data = get_weather()
-    if data:
-        update_readme(data)
+# Save changes
+with open("README.md", "w", encoding="utf-8") as f:
+    f.write(readme)
