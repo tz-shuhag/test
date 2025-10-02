@@ -18,3 +18,8 @@ See [docs/SETUP.md](./docs/SETUP.md) for installation and development instructio
 ## Contributing
 
 Contributions are welcome! Please open an issue or pull request.
+
+## Weather (Sylhet)
+
+<!-- WEATHER-START -->
+<!-- WEATHER-END -->
