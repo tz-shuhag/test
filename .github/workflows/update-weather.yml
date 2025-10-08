@@ -1,40 +1,32 @@
-name: update-weather
-
-# ✅ Allow workflow to push changes
-permissions:
-  contents: write
+name: Update Weather (BMD)
 
 on:
   schedule:
-    - cron: '0 */6 * * *'   # runs every 6 hours
-  workflow_dispatch:        # allow manual trigger
+    - cron: "*/30 * * * *"  # runs every 30 minutes
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   update:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: "3.11"
 
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install requests beautifulsoup4
+        run: pip install requests
 
-      - name: Run weather update script
-        run: python update_weather.py
-
-      - name: Commit & push changes
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add README.md
-          git commit -m "Update weather data (BMD)" || echo "No changes to commit"
-          git push
+      - name: Update weather in README
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python update_weather.py
