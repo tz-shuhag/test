@@ -2,31 +2,28 @@ import requests
 import datetime
 import subprocess
 import re
-import json
 
 # ====== CONFIGURATION ======
-# Replace stCode with your station code if needed (Sylhet = 41891)
-URL = "https://presite.bmd.gov.bd/tracking/track.php?stCode=41891&lang=EN"
+# Sylhet coordinates (approx.)
+LAT, LON = 24.8949, 91.8687
+URL = f"https://api.open-meteo.com/v1/forecast?latitude={LAT}&longitude={LON}&current=temperature_2m,relative_humidity_2m"
 README = "README.md"
 START_MARKER = "<!-- WEATHER-START -->"
 END_MARKER = "<!-- WEATHER-END -->"
 # ============================
 
 def fetch_weather():
-    """Fetch current weather data from BMD JSON endpoint."""
+    """Fetch current weather data from Open-Meteo."""
     try:
         r = requests.get(URL, timeout=15)
         r.raise_for_status()
         data = r.json()
-        print("✅ JSON received:\n", json.dumps(data, indent=2))
 
-        # Adjust these keys according to actual JSON structure
-        current = data.get("temperature") or data.get("temp")
-        tmin = data.get("min_temp") or data.get("mintemp") or data.get("min")
-        tmax = data.get("max_temp") or data.get("maxtemp") or data.get("max")
-        humidity = data.get("humidity") or data.get("hum")
+        current = data["current"]["temperature_2m"]
+        humidity = data["current"]["relative_humidity_2m"]
 
-        return current, tmin, tmax, humidity
+        # Open-Meteo doesn't provide min/max in the free endpoint, so we skip those.
+        return current, None, None, humidity
 
     except Exception as e:
         print("❌ Error fetching weather data:", e)
@@ -37,11 +34,9 @@ def update_readme(current, tmin, tmax, humidity):
     """Update README.md with new weather values."""
     now = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
     block = f"""{START_MARKER}
-### Sylhet Weather (Source: [BMD](https://live6.bmd.gov.bd))
+### Sylhet Weather (Source: [Open-Meteo](https://open-meteo.com))
 _Updated: {now}_
 * 🌡️ **Current Temperature:** {current or '..'}°C
-* 🔻 **Min Temperature:** {tmin or '..'}°C
-* 🔺 **Max Temperature:** {tmax or '..'}°C
 * 💧 **Humidity:** {humidity or '..'}%
 {END_MARKER}
 """
