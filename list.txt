@@ -10,3 +10,5 @@ youtube.com##ytd-guide-entry-renderer:has(yt-formatted-string:has-text(/^Shorts$
 
 ! Reccomendations
 youtube.com###content-wrapper
+youtube.com##ytd-item-section-renderer.style-scope.ytd-watch-next-secondary-results-renderer[lockup-container-type][exp-fix-playlist-header][enable-anchored-panel][section-identifier][header-style]
+youtube.com##iron-selector#chips.style-scope.yt-chip-cloud-renderer[activate-event][role][selected-attribute][style]
