@@ -7,6 +7,8 @@ youtube.com##grid-shelf-view-model.ytGridShelfViewModelHostHasBottomButton.ytd-i
 youtube.com##grid-shelf-view-model:nth-of-type(3)
 youtube.com##ytd-video-renderer:has([overlay-style="SHORTS"])
 youtube.com##ytd-guide-entry-renderer:has(yt-formatted-string:has-text(/^Shorts$/i))
+youtube.com##ytd-mini-guide-entry-renderer:has(.title:has-text(/^Shorts$/i))
+
 
 ! Reccomendations
 youtube.com###content-wrapper
