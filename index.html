@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cover Page Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2>Cover Page Details</h2>
+            <form id="cover-page-form">
+                <label for="report-title">Report Title:</label>
+                <input type="text" id="report-title" value="Lab Report — 1">
+
+                <label for="course-title">Course Title:</label>
+                <input type="text" id="course-title" value="Basic Electrical Engineering Lab">
+
+                <label for="course-code">Course Code:</label>
+                <input type="text" id="course-code" value="CSE 124">
+
+                <label for="submitted-to-name">Submitted to (Name):</label>
+                <input type="text" id="submitted-to-name" value="Ahmed Istiakur Rahman">
+
+                <label for="submitted-to-details">Submitted to (Details):</label>
+                <textarea id="submitted-to-details" rows="3">Lecturer,
+Department of EEE,
+Metropolitan University, Sylhet</textarea>
+
+                <label for="submitted-by-name">Submitted by (Name):</label>
+                <input type="text" id="submitted-by-name" value="Md Abu Bokkor Ahmed">
+                
+                <label for="submitter-id">ID:</label>
+                <input type="text" id="submitter-id" value="252 - 115 - 020">
+                
+                <label for="submitter-batch">Batch / Section:</label>
+                <input type="text" id="submitter-batch" value="CSE 63, Section: A">
+
+                <label for="submission-date">Date of Submission:</label>
+                <input type="text" id="submission-date" value="09.10.2025">
+
+                <button type="button" onclick="window.print()">Print / Save as PDF</button>
+            </form>
+        </div>
+
+        <div class="a4-container">
+            <div id="cover-page" class="a4-page">
+                <div class="header">
+                    <img src="assets/mu-logo.png" alt="University Logo" class="logo">
+                </div>
+                <div class="content">
+                    <h1 id="output-report-title"></h1>
+                    <p><b>Course Title :</b> <span id="output-course-title"></span></p>
+                    <p><b>Course Code :</b> <span id="output-course-code"></span></p>
+
+                    <div class="submission-details">
+                        <div class="submitted-to">
+                            <p><b><u>Submitted to :</u></b></p>
+                            <p id="output-submitted-to-name"></p>
+                            <pre id="output-submitted-to-details"></pre>
+                        </div>
+                        <div class="submitted-by">
+                            <p><b><u>Submitted By :</u></b></p>
+                            <p id="output-submitted-by-name"></p>
+                            <pre id="output-submitted-by-details"></pre>
+                        </div>
+                    </div>
+
+                    <div class="submission-date">
+                        <p><b>Date of Submission:</b> <span id="output-submission-date"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
