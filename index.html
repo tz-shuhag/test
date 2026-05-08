@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TZ Shuhag</title>
+
+  <!-- favicon — same as your portfolio -->
+  <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
+
+  <!-- Bebas Neue — matches the heavy condensed look in the screenshots -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── Reset ─────────────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: #0f0f0f;
+    }
+
+    /* ─── Page wrapper ───────────────────────────────────── */
+    #landing {
+      position: relative;
+      width: 100vw;
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ─── Scrolling text marquee rows ───────────────────── */
+    #text-bg {
+      position: absolute;
+      top: 0;
+      left: -20px;
+      right: -20px;
+      /* Covers ~85 % of the page height — text area */
+      height: 83%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .t-row {
+      font-family: 'Bebas Neue', Impact, sans-serif;
+      /* Big on desktop, responsive on mobile */
+      font-size: clamp(58px, 9.5vw, 140px);
+      color: #00ffab;
+      white-space: nowrap;
+      line-height: 0.90;
+      letter-spacing: 0.01em;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* ─── Radial-gradient overlay — dims the edges ──────── */
+    /*   gives the "bright centre, dark periphery" look     */
+    #overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 83%;
+      z-index: 1;
+      background: radial-gradient(
+        ellipse 72% 62% at 50% 42%,
+        transparent  0%,
+        rgba(15, 15, 15, 0.46) 45%,
+        rgba(15, 15, 15, 0.86) 100%
+      );
+      pointer-events: none;
+    }
+
+    /* ─── Profile photo ──────────────────────────────────── */
+    #photo {
+      /* Sits above text but inside the text-bg zone */
+      position: relative;
+      z-index: 2;
+      /* Push down into the text area, centre it */
+      margin-top: clamp(30px, 8vh, 80px);
+      width: min(46vw, 270px);
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    /* ─── Button + label ─────────────────────────────────── */
+    #actions {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(16px, 3vh, 28px);
+      /* Sits in the dark band below the text grid */
+      margin-top: clamp(24px, 4.5vh, 50px);
+      padding-bottom: clamp(28px, 5vh, 55px);
+      width: 100%;
+    }
+
+    .find-btn {
+      display: block;
+      width: min(82vw, 410px);
+      padding: 17px 0;
+      background: rgba(12, 12, 12, 0.96);
+      color: #00ffab;
+      border: 1.5px solid rgba(0, 255, 171, 0.22);
+      font-family: 'Bebas Neue', Impact, sans-serif;
+      font-size: clamp(15px, 2vw, 19px);
+      letter-spacing: 0.13em;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease;
+    }
+
+    .find-btn:hover,
+    .find-btn:focus-visible {
+      background: #00ffab;
+      color: #0d0d0d;
+      border-color: #00ffab;
+      outline: none;
+    }
+
+    .about-label {
+      font-family: 'Bebas Neue', Impact, sans-serif;
+      font-size: clamp(18px, 2.6vw, 24px);
+      color: #00ffab;
+      letter-spacing: 0.14em;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="landing">
+
+    <!-- Repeated text grid -->
+    <div id="text-bg"></div>
+
+    <!-- Radial vignette that darkens the edges of the text grid -->
+    <div id="overlay"></div>
+
+    <!-- Your profile photo — same asset already in your repo -->
+    <img id="photo" src="./assets/images/avater.png" alt="TZ Shuhag">
+
+    <!-- Button + About Me label -->
+    <div id="actions">
+      <!--
+        "Find Me Here" links to your existing portfolio.
+        Make sure you rename your current index.html → main.html first.
+      -->
+      <a class="find-btn" href="./main.html">Find Me Here &rarr;</a>
+      <span class="about-label">About Me</span>
+    </div>
+
+  </div>
+
+  <script>
+    (function () {
+      const bg     = document.getElementById('text-bg');
+      const WORD   = 'TZ SHUHAG  ';   // two trailing spaces = gap between words
+      const REPEAT = 18;               // enough repetitions to bleed off any screen width
+
+      // Calculate how many rows to fill the container's height
+      // (We set the container to 83 vh via CSS, so use that)
+      const containerH = window.innerHeight * 0.83 + 40; // +40 px buffer
+      const fontSize   = Math.max(58, Math.min(window.innerWidth * 0.095, 140));
+      const lineH      = fontSize * 0.90;
+      const rowCount   = Math.ceil(containerH / lineH) + 2;
+
+      const fragment = document.createDocumentFragment();
+      for (let i = 0; i < rowCount; i++) {
+        const row       = document.createElement('div');
+        row.className   = 't-row';
+        row.textContent = WORD.repeat(REPEAT);
+        fragment.appendChild(row);
+      }
+      bg.appendChild(fragment);
+    })();
+  </script>
+</body>
+</html>
