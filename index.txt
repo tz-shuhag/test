@@ -1,0 +1,173 @@
+TZ Shuhag Portfolio
+
+# sidebar
+
+alt = TZ Shuhag
+TZ Shuhag
+Web developer
+
+Show Contacts
+
+Email
+tzshuhag@outlook.com
+
+Phone
++88018655-02174
+
+Birthday
+July 28, 2003
+
+Location
+Sylhet, Bangladesh
+
+# navbar
+
+About
+Resume
+Portfolio
+Blog
+Contact
+
+# about
+
+About me
+
+I'm a Student from Sylhet, Bangladesh, working in IT and Tech development and print media. I enjoy solving complex problems into simple, beautiful and intuitive solutions.
+
+I like to build efficient systems and provide solutions to IT Based companies and customers.
+
+
+## service
+
+What i'm doing
+
+alt = design icon
+Corporate DNS Configuration
+The most modern and high-quality dns made at a professional level.
+
+alt = Web development icon
+Hardware & Software Troubleshooting
+High-quality development of software and hardware at the professional level.
+
+alt = mobile app icon
+Mobile apps
+Professional development of applications for Android.
+
+alt = camera icon
+Photography
+I make high-quality photos and videos of any category at a professional level.
+
+
+# resume
+
+Resume
+
+Education
+
+Shahjalal University of Science & Technology
+2023 — Present
+Dept. of Petroleum & Mining Engeenering
+
+Murari Chand College
+2021 — 2023
+Studied Science as Major
+
+Border Guard Public School & College
+2018 — 2020
+Studied Science as Major
+
+Experience
+
+IT Project Manager
+2023 — 2024
+TSC Express
+
+Grammar Module Instructor
+2023 — 2026
+Qul’Sai IELTS Academy
+
+Founder
+2023 — 2024
+BandX
+
+My skills
+
+Hardware & Software Troubleshooting
+80%
+WiFi Setup & Speed Optimization (All ISPs)
+70%
+Corporate DNS Configuration
+90%
+OS Installation & Configuration
+50%
+
+
+
+# portfolio
+
+Portfolio
+
+All
+Extension
+Applications
+Platform
+
+Select category
+All
+Extension
+Applications
+Platform
+
+alt = Bandx
+BandX
+Platform
+
+alt = HD.264
+HD.264
+Extension
+
+alt = Dark Mode
+Dark Mode
+Extension
+
+alt = Coverpage
+Coverpage
+Applications
+
+alt = YTFocus
+YTFocus
+Applications
+
+alt = YT-HD
+YT-HD
+Extension
+
+alt = Hide Shorts
+Hide Shorts
+Applications
+
+alt = SimpTab
+SimpTab
+Extension
+
+alt = Anyflare
+Anyflare
+Applications
+
+alt = QRcreate
+QRcreate
+Applications
+
+
+
+# contact
+
+Contact
+
+Contact Form
+
+Full name
+Email address
+Your Message
+
+Send Message
